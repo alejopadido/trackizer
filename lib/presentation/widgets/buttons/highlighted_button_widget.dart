@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:trackizer/core/constants/theme/app_colors.dart';
 
 class HighlightedButtonWidget extends StatelessWidget {
   final void Function()? onPressed;
@@ -9,11 +8,7 @@ class HighlightedButtonWidget extends StatelessWidget {
   final String? icon;
 
   const HighlightedButtonWidget(
-      {super.key,
-      this.onPressed,
-      required this.label,
-      required this.color,
-      this.icon});
+      {super.key, this.onPressed, required this.label, required this.color, this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +29,10 @@ class HighlightedButtonWidget extends StatelessWidget {
         child: FilledButton(
           style: ButtonStyle(
               backgroundColor: WidgetStatePropertyAll(color),
-              padding: const WidgetStatePropertyAll(
-                  EdgeInsets.symmetric(vertical: 14.0))),
+              padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 14.0))),
           onPressed: onPressed,
           child: icon == null
-              ? Text(label,
-                  style: const TextStyle(fontSize: 18.0, color: Colors.white))
+              ? Text(label, style: const TextStyle(fontSize: 18.0, color: Colors.white))
               : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,9 +44,7 @@ class HighlightedButtonWidget extends StatelessWidget {
                     Text(label,
                         style: TextStyle(
                             fontSize: 18.0,
-                            color: color == Colors.white
-                                ? Colors.black
-                                : Colors.white))
+                            color: color == Colors.white ? Colors.black : Colors.white))
                   ],
                 ),
         ),

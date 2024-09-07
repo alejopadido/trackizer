@@ -61,8 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               });
                             },
                           ),
-                          const Text('Remember me',
-                              style: TextStyle(color: AppColors.grey50)),
+                          const Text('Remember me', style: TextStyle(color: AppColors.grey50)),
                         ],
                       ),
                       TextButton(
@@ -79,17 +78,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   const SizedBox(height: 15.0),
-                  const HighlightedButtonWidget(
+                  HighlightedButtonWidget(
                     label: 'Sign In',
                     color: AppColors.accentP100,
+                    onPressed: () {
+                      appRouter.go('/');
+                    },
                   )
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text('You don\'t have an account yet?',
-                      textAlign: TextAlign.center),
+                  const Text('You don\'t have an account yet?', textAlign: TextAlign.center),
                   const SizedBox(height: 15.0),
                   GreyButtonWidget(
                     label: 'Sign Up',
@@ -104,6 +105,5 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-    ;
   }
 }

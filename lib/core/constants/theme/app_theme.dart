@@ -11,6 +11,10 @@ class AppTheme {
             fontSize: 16.0,
           ),
         ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
+        ),
+        fontFamily: 'Inter',
         useMaterial3: true,
       );
 }

@@ -51,7 +51,11 @@ class WelcomeScreen extends StatelessWidget {
               },
             ),
             const SizedBox(height: 20.0),
-            const GreyButtonWidget(label: 'I have an account')
+            GreyButtonWidget(
+                label: 'I have an account',
+                onPressed: () {
+                  appRouter.go('/login');
+                })
           ],
         ),
       ),
