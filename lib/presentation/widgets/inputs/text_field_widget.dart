@@ -22,12 +22,13 @@ class TextFieldWidget extends StatelessWidget {
     return TextFormField(
       obscureText: obscure!,
       controller: controller,
+      validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         label: Text(label),
         hintText: hint,
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        floatingLabelStyle:
-            const TextStyle(color: AppColors.grey50, fontSize: 20.0),
+        floatingLabelStyle: const TextStyle(color: AppColors.grey50, fontSize: 20.0),
         hintStyle: const TextStyle(color: AppColors.grey50),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15.0),
@@ -51,8 +52,6 @@ class TextFieldWidget extends StatelessWidget {
         ),
         errorStyle: const TextStyle(color: AppColors.error),
       ),
-      validator: validator,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
     );
   }
 }
