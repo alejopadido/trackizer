@@ -14,8 +14,6 @@ class BillCardWidget extends StatelessWidget {
     final day = date.day.toString();
     final shortMonth = DateFormat('MMM').format(date);
 
-    const dateTextStyle = TextStyle(fontSize: 16.0, color: AppColors.grey30);
-
     return Column(
       children: [
         const SizedBox(height: 15.0),
@@ -31,8 +29,8 @@ class BillCardWidget extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(shortMonth, style: dateTextStyle),
-                  Text(day, style: dateTextStyle),
+                  Text(shortMonth, style: const TextStyle(fontSize: 14.0)),
+                  Text(day, style: const TextStyle(fontSize: 18.0)),
                 ],
               ),
             ),
