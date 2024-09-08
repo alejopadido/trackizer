@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trackizer/core/constants/theme/app_colors.dart';
+import 'package:trackizer/presentation/screens/home/page_selector_widget.dart';
 import 'package:trackizer/presentation/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -8,6 +9,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PageController _controller = PageController();
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -37,28 +40,28 @@ class HomeScreen extends StatelessWidget {
                   ),
                   _circularProgressAndSpending(),
                   const SizedBox(height: 15.0),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      StatsCardWidget(
-                        color: AppColors.accentP50,
-                        name: 'Active subs',
-                        value: 12,
-                      ),
-                      StatsCardWidget(
-                        color: AppColors.primary10,
-                        name: 'Highest subs',
-                        value: 19.99,
-                        isMoney: true,
-                      ),
-                      StatsCardWidget(
-                        color: AppColors.accentS50,
-                        name: 'Lowest subs',
-                        value: 5.99,
-                        isMoney: true,
-                      ),
-                    ],
-                  ),
+                  _statsRow(),
+                ],
+              ),
+            ),
+            const SizedBox(height: 15.0),
+            PageSelectorWidget(
+              onPageChanged: (value) {
+                print('Jumping to $value');
+                _controller.animateToPage(
+                  value,
+                  duration: const Duration(milliseconds: 400),
+                  curve: Curves.easeInSine,
+                );
+              },
+            ),
+            Flexible(
+              child: PageView(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: _controller,
+                children: [
+                  _subscriptionsList(),
+                  _billsList(),
                 ],
               ),
             ),
@@ -83,7 +86,7 @@ Widget _circularProgressAndSpending() {
           const SizedBox(height: 15.0),
           const Text(
             '\$1,235',
-            style: TextStyle(fontSize: 45.0, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
           ),
           const Text(
             'This month bills',
@@ -99,5 +102,56 @@ Widget _circularProgressAndSpending() {
         ],
       ),
     ],
+  );
+}
+
+Widget _statsRow() {
+  return const Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      StatsCardWidget(
+        color: AppColors.accentP50,
+        name: 'Active subs',
+        value: 12,
+      ),
+      const StatsCardWidget(
+        color: AppColors.primary10,
+        name: 'Highest subs',
+        value: 19.99,
+        isMoney: true,
+      ),
+      StatsCardWidget(
+        color: AppColors.accentS50,
+        name: 'Lowest subs',
+        value: 5.99,
+        isMoney: true,
+      ),
+    ],
+  );
+}
+
+Widget _subscriptionsList() {
+  return ListView.builder(
+    itemCount: 3,
+    itemBuilder: (context, index) {
+      return const SubscriptionCardWidget(
+        logo: 'assets/icons/Spotify Logo.svg',
+        name: 'Spotify',
+        price: '5.99',
+      );
+    },
+  );
+}
+
+Widget _billsList() {
+  return ListView.builder(
+    itemCount: 3,
+    itemBuilder: (context, index) {
+      return BillCardWidget(
+        date: DateTime.now(),
+        name: 'Youtube',
+        price: '7.99',
+      );
+    },
   );
 }
